@@ -2,8 +2,9 @@
 #include "stdio.h"
 #include "math.h"
 #include "mpu6050.h"
-#include "parameter.h"
+#include "config.h"
 #include "delay.h"
+#include "stmflash.h"
 
 xyz_s16_t Acc_Avg;		//滑动滤波后加速度计值
 xyz_f_t Angle;			//数据融合计算出的角度
@@ -64,88 +65,7 @@ void Prepare_Data(void)
 	ACC_Flitter();		 	 //加速度计预滤波
 }
 
-void MPU6050_GetGyro_Offset(void)
-{
-	uint8_t i=100;
-	double temp_x=0;
-	double temp_y=0;
-	double temp_z=0;
-	printf("\r\nStart GetOffset---->gyro\r\n");
-	while(i--)
-	{
-		MPU_Get_Gyroscope(&(mpu6050.Gyro_I16.x),&(mpu6050.Gyro_I16.y),&(mpu6050.Gyro_I16.z));
-		temp_x+=mpu6050.Gyro_I16.x;
-		temp_y+=mpu6050.Gyro_I16.y;
-		temp_z+=mpu6050.Gyro_I16.z;
-		printf(".");
-		delay_ms(5);
-	}
-	mpu6050.Gyro_Offset.x=(int16_t)(temp_x/100.0f);
-	mpu6050.Gyro_Offset.y=(int16_t)(temp_y/100.0f);
-	mpu6050.Gyro_Offset.z=(int16_t)(temp_z/100.0f);
-	printf("\r\nEnd GetOffset---->gyro\r\n");
-	printf("Gyro_Offset.x --> %d\r\n",mpu6050.Gyro_Offset.x);
-	printf("Gyro_Offset.y --> %d\r\n",mpu6050.Gyro_Offset.y);
-	printf("Gyro_Offset.z --> %d\r\n",mpu6050.Gyro_Offset.z);
-}
-void MPU6050_GetAcc_Offset(void)
-{
-	uint8_t i=100;
-	double temp_x=0;
-	double temp_y=0;
-	double temp_z=0;
-	printf("\r\nStart GetOffset---->Acc\r\n");
-	printf("\r\n\r\nStart X\r\n\r\n");
-	delay_ms(1000);
-	delay_ms(1000);
-	delay_ms(1000);
-	delay_ms(1000);
-	printf("dont move\r\n");
-	while(i--)
-	{
-		MPU_Get_Accelerometer(&(mpu6050.Acc_I16.x),&(mpu6050.Acc_I16.y),&(mpu6050.Acc_I16.z));
-		temp_x+=mpu6050.Acc_I16.x;
-		printf("X");
-		delay_ms(5);
-	}
-	printf("\r\n\r\nStart Y\r\n\r\n");
-	delay_ms(1000);
-	delay_ms(1000);
-	delay_ms(1000);
-	delay_ms(1000);
-	printf("dont move\r\n");
-	i=100;
-	while(i--)
-	{
-		MPU_Get_Accelerometer(&(mpu6050.Acc_I16.x),&(mpu6050.Acc_I16.y),&(mpu6050.Acc_I16.z));
-		temp_y+=mpu6050.Acc_I16.y;
-		printf("Y");
-		delay_ms(5);
-	}
-	printf("\r\n\r\nStart Z\r\n\r\n");
-	delay_ms(1000);
-	delay_ms(1000);
-	delay_ms(1000);
-	delay_ms(1000);
-	printf("dont move\r\n");
-	i=100;
-	while(i--)
-	{
-		MPU_Get_Accelerometer(&(mpu6050.Acc_I16.x),&(mpu6050.Acc_I16.y),&(mpu6050.Acc_I16.z));
-		temp_z+=mpu6050.Acc_I16.z;
-		printf("Z");
-		delay_ms(5);
-	}
-	
-	
-	mpu6050.Acc_Offset.x=(int16_t)(temp_x/100.0f)-4096;
-	mpu6050.Acc_Offset.y=(int16_t)(temp_y/100.0f)-4096;
-	mpu6050.Acc_Offset.z=(int16_t)(temp_z/100.0f)-4096;
-	printf("\r\nEnd GetOffset---->Acc\r\n");
-	printf("Acc_Offset.x --> %d\r\n",mpu6050.Acc_Offset.x);
-	printf("Acc_Offset.y --> %d\r\n",mpu6050.Acc_Offset.y);
-	printf("Acc_Offset.z --> %d\r\n",mpu6050.Acc_Offset.z);
-}
+
 
 float ex_int = 0, ey_int = 0, ez_int = 0;   //X、Y、Z轴的比例误差
 float q0 = 1, q1 = 0, q2 = 0, q3 = 0;    //定义四元素

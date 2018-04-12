@@ -7,6 +7,7 @@
 #include "tim3.h"
 #include "taskrun.h"
 #include "delay.h"
+#include "config.h"
 
 uint8_t SYS_INIT_OK=0;
 
@@ -29,7 +30,16 @@ int main(void)
 	}
 //	MotorInit();	//电机初始化
 //	MotorPwmFlash(0,0,0,0);
+	GetConfig();
+	printf("config: \r\n");
+	printf("gyro--->\tX: %d\tY: %d\tZ: %d\r\nAcc --->\tX: %d\tY: %d\tZ: %d\r\n",
+		mpu6050.Gyro_Offset.x,mpu6050.Gyro_Offset.y,mpu6050.Gyro_Offset.z,
+		mpu6050.Acc_Offset.x,mpu6050.Acc_Offset.y,mpu6050.Acc_Offset.z
+	);
 	SYS_INIT_OK=1;									//初始化完成
+	
+	
+	
 	while(1)
 	{
 		if(tim3_int)

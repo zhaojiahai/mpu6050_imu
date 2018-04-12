@@ -1,6 +1,6 @@
 #ifndef __AHRS_H_
 #define __AHRS_H_
-#include "parameter.h"
+#include "config.h"
 #define SAMPLE_HALF_T 0.0005f	//采样周期的一半，单位：s
 #define FILTER_LENGTH 20		//滑动滤波窗口长度
 
@@ -18,6 +18,5 @@ extern void ACC_Flitter(void);
 extern void AHRS_Data_Init(void);
 extern void IMU_Update(void);
 extern void Prepare_Data(void);
-extern void MPU6050_GetAcc_Offset(void);
-extern void MPU6050_GetGyro_Offset(void);
+
 #endif

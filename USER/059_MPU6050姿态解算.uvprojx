@@ -336,7 +336,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_HD,USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\sys;..\HARDWARE\MPU6050;..\QUAD\ANO_DT;..\HARDWARE\TIM3;..\QUAD\PARAMETER;..\QUAD\TaskRun;..\SYSTEM\time;..\QUAD\AHRS;..\HARDWARE\MOTO;..\HARDWARE\UART4;..\QUAD\Commander;..\SYSTEM\delay</IncludePath>
+              <IncludePath>..\USER;..\CORE;..\STM32F10x_FWLib\inc;..\SYSTEM\sys;..\HARDWARE\MPU6050;..\QUAD\ANO_DT;..\HARDWARE\TIM3;..\QUAD\TaskRun;..\SYSTEM\time;..\QUAD\AHRS;..\HARDWARE\MOTO;..\HARDWARE\UART4;..\QUAD\Commander;..\SYSTEM\delay;..\HARDWARE\STMFLASH;..\QUAD\Config</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -460,6 +460,11 @@
               <FileType>1</FileType>
               <FilePath>..\STM32F10x_FWLib\src\stm32f10x_usart.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32f10x_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\STM32F10x_FWLib\src\stm32f10x_flash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -500,6 +505,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\TIM3\tim3.c</FilePath>
             </File>
+            <File>
+              <FileName>stmflash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\STMFLASH\stmflash.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -524,6 +534,11 @@
               <FileName>commander.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\QUAD\Commander\commander.c</FilePath>
+            </File>
+            <File>
+              <FileName>config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\QUAD\Config\config.c</FilePath>
             </File>
           </Files>
         </Group>
